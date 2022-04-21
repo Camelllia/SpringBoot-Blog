@@ -46,9 +46,28 @@
 
     <div class="starter-template">
         <h1>메인 페이지</h1>
-        <p class="lead">나의 블로그<br> 나의 블로그</p>
+        <p class="lead">오늘의 추천 글</p>
     </div>
-
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">번호</th>
+                <th scope="col">제목</th>
+                <th scope="col">작성자</th>
+                <th scope="col">카테고리</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td th:text="${recommendedBoard.id}">Mark</td>
+                <td><a th:text="${recommendedBoard.title}" th:href="@{/board/form/(id=${recommendedBoard.id})}">Otto</a> </td>
+                <td>홍길동</td>
+                <td th:text="${recommendedBoard.category}">여행</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </main><!-- /.container -->
 
 <!-- Optional JavaScript -->
