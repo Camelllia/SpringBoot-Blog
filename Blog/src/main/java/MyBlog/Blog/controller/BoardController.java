@@ -3,6 +3,10 @@ package MyBlog.Blog.controller;
 import MyBlog.Blog.model.board;
 import MyBlog.Blog.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,27 +24,43 @@ public class BoardController {
 
     // 전체 글 모음
     @GetMapping("/list")
-    public String WriteForm(Model model) {
-        List<board> boards = boardRepository.findAll();
+    public String list(Model model, @PageableDefault(size=10) Pageable pageable) {
+
+        //페이징 처리
+        Page<board> boards = boardRepository.findAll(pageable);
+        int startPage = Math.max(boards.getPageable().getPageNumber() - 4, 1);
+        int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
+        model.addAttribute("startPage", startPage);
+        model.addAttribute("endPage", endPage);
+
         model.addAttribute("boards", boards);
         return "board/list";
     }
 
     // 카테고리 - 여행
     @GetMapping("/Trip")
-    public String trip() {
+    public String trip(Model model) {
+
+        List<board> tripBoards = boardRepository.findByCategory("여행");
+        model.addAttribute("tripBoards", tripBoards);
         return "board/Trip";
     }
 
     // 카테고리 - 공부
     @GetMapping("/Study")
-    public String study() {
+    public String study(Model model) {
+
+        List<board> studyBoards = boardRepository.findByCategory("공부");
+        model.addAttribute("studyBoards", studyBoards);
         return "board/Study";
     }
 
     // 카테고리 - 잡담
     @GetMapping("/Gossip")
-    public String gossip() {
+    public String gossip(Model model) {
+
+        List<board> gossipBoards = boardRepository.findByCategory("잡담");
+        model.addAttribute("gossipBoards", gossipBoards);
         return "board/Gossip";
     }
 
