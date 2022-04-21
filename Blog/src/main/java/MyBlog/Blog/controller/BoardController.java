@@ -66,7 +66,9 @@ public class BoardController {
         if(bindingResult.hasErrors()) {
             return "board/form";
         }
+
         boardRepository.save(board);
         return "redirect:/board/list";
     }
+
 }
