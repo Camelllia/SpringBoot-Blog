@@ -24,10 +24,10 @@ public class BoardController {
 
     // 전체 글 모음
     @GetMapping("/list")
-    public String list(Model model, @PageableDefault(size=10) Pageable pageable) {
+    public String list(Model model, @PageableDefault(size=10) Pageable pageable, @RequestParam(required = false, defaultValue = "") String searchText) {
 
         //페이징 처리
-        Page<board> boards = boardRepository.findAll(pageable);
+        Page<board> boards = boardRepository.findByTitleContainingOrContentContaining(searchText, searchText, pageable);
         int startPage = Math.max(boards.getPageable().getPageNumber() - 4, 1);
         int endPage = Math.min(boards.getTotalPages(), boards.getPageable().getPageNumber() + 4);
         model.addAttribute("startPage", startPage);

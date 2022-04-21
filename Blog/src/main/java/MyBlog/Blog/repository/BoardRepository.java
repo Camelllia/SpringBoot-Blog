@@ -1,6 +1,8 @@
 package MyBlog.Blog.repository;
 
 import MyBlog.Blog.model.board;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -15,4 +17,7 @@ public interface BoardRepository extends JpaRepository<board, Long> {
 
     // 제목 + 카테고리 동시 조회
     List<board> findByTitleAndCategory(String title, String category);
+
+    // 검색(searchText) 단위 조회용
+    Page<board> findByTitleContainingOrContentContaining(String title, String content, Pageable pageable);
 }
