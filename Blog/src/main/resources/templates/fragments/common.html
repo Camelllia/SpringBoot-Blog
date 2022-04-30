@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="kr" xmlns:th="http://www.thymeleaf.org">
+<html lang="kr" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="menu">
     <a class="navbar-brand" th:href="@{/}">My Blog</a>
@@ -26,10 +26,16 @@
                 </div>
             </li>
         </ul>
-        <!-- <form class="form-inline my-2 my-lg-0">
-             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-             <button ㄴclass="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-         </form>-->
+        <a class="btn btn-secondary my-2 mr-2 my-sm-0" th:href="@{/account/login}"
+        sec:authorize="!isAuthenticated()">로그인</a>
+        <a class="btn btn-secondary my-2 my-sm-0" th:href="@{/account/register}"
+           sec:authorize="!isAuthenticated()">회원가입</a>
+        <form class="form-inline my-2 my-lg-0" th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+            <!--             <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">-->
+            <span class="text-white" sec:authentication="name">사용자</span>
+            <span class="text-white mx-2"sec:authentication="principal.authorities">권한</span>
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">로그아웃</button>
+        </form>
     </div>
 </nav>
 </body>
