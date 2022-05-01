@@ -62,7 +62,7 @@
             <tr>
                 <td th:text="${recommendedBoard.id}">Mark</td>
                 <td><a th:text="${recommendedBoard.title}" th:href="@{/board/form/(id=${recommendedBoard.id})}">Otto</a> </td>
-                <td>홍길동</td>
+                <td th:text="${recommendedBoard.user.username}">홍길동</td>
                 <td th:text="${recommendedBoard.category}">여행</td>
             </tr>
             </tbody>

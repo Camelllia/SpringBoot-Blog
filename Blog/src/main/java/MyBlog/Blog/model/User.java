@@ -1,5 +1,7 @@
 package MyBlog.Blog.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -57,11 +59,22 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<board> boards = new ArrayList<>();
+
     public List<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<board> getBoards() {
+        return boards;
+    }
+
+    public void setBoards(List<board> boards) {
+        this.boards = boards;
     }
 }

@@ -62,7 +62,7 @@
             <tr th:each="tripBoards : ${tripBoards}">
                 <td th:text="${tripBoards.id}">Mark</td>
                 <td><a th:text="${tripBoards.title}" th:href="@{/board/form(id=${tripBoards.id})}">Otto</a> </td>
-                <td>홍길동</td>
+                <td th:text="${tripBoards.user.username}">홍길동</td>
                 <td th:text="${tripBoards.category}">여행</td>
             </tr>
             </tbody>

@@ -62,7 +62,7 @@
             <tr th:each="gossipBoards : ${gossipBoards}">
                 <td th:text="${gossipBoards.id}">Mark</td>
                 <td><a th:text="${gossipBoards.title}" th:href="@{/board/form(id=${gossipBoards.id})}">Otto</a> </td>
-                <td>홍길동</td>
+                <td th:text="${gossipBoards.user.username}">홍길동</td>
                 <td th:text="${gossipBoards.category}">여행</td>
             </tr>
             </tbody>
