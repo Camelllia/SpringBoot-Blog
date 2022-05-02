@@ -51,6 +51,7 @@ public class User {
         this.enabled = enabled;
     }
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(
             name = "user_role",
@@ -59,7 +60,9 @@ public class User {
     )
     private List<Role> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    /*@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)*/
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    //@JsonIgnore
     private List<board> boards = new ArrayList<>();
 
     public List<Role> getRoles() {

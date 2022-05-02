@@ -71,6 +71,7 @@
             <td><a th:text="${board.title}" th:href="@{/board/form(id=${board.id})}">Otto</a> </td>
             <td th:text="${board.user.username}">홍길동</td>
               <td th:text="${board.category}">Otto</td>
+              <td><button type="submit" class="btn btn-primary" sec:authorize="hasRole('ROLE_ADMIN')">삭제</button></td>
           </tr>
         </tbody>
       </table>
